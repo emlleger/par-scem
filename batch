@@ -1,0 +1,18 @@
+# -*- shell-script -*-
+
+# PBS resources.
+
+# Job name.
+#PBS -N SCEM_UA
+
+# Output files go in this directory.
+#PBS -o /home/uva/a428/jvrugt/batches
+
+# Error output files go in this directory.
+#PBS -e /home/uva/a428/jvrugt/batches
+
+# Change to directory with program.
+cd ${HOME}/Algorithms/SCEM-UA
+
+# Run lamoctave on input file. 
+${HOME}/lamoctave master.m

@@ -1,0 +1,21 @@
+
+# PBS resources.
+
+#PBS -lwalltime=00:05:00 -lnodes=1:cores2
+
+# Job name
+#PBS -N SCEM_UA
+
+# Output files go in this directory.
+#PBS -o ${HOME}/batches
+
+# Error output files go in this directory.
+#PBS -e ${HOME}/batches
+
+export SCEM_HOME=${HOME}/ParSCEM 
+
+# Change to directory with program.
+cd ${SCEM_HOME}
+
+# Start paralel SCEM
+${SCEM_HOME}/start_SCEM.sh

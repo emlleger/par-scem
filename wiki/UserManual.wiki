@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary This document presents the usage instructions of the parallel SCEM algorithm on the Lisa computer cluster.
 
 = Parallel programming on Lisa =
 Roughly, parallel computing occurs when a problem is split in different tasks that are executed in 
@@ -51,7 +51,7 @@ rest o this document.
 
 = Create an account on the Lisa cluster =
 
-If you do not have  an account on the Lisa cluster, send an e-mail to SARA (hic@sara.nl) with the 
+If you do not have  an account on the Lisa cluster, send an e-mail to SARA (hic at sara dot nl) with the 
 following information: 
 
 * Your name, address, telephone number, e-mail address 
@@ -73,4 +73,78 @@ of Putty from http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe.
 After the first login, don't forget to change your password, using the passwd command. 
 
 =  Copying your model files in your Lisa account =
+
+In order to do this this you need a FTP client. On Windows machines you can use WinSCP, which 
+can be downloaded from http://winscp.net/download/winscp421setup.exe. To install it launch the 
+executable and follow the steps in the wizard. 
+To copy the model files to your account: 
+1. Launch WinSCP 
+2. Login to your FTP account on Lisa:
+3. Click Login (you can also save the session for future use) 
+4. Create your model directory in your account 
+5. Copy there the files as described in section “Running Parallel SCEM on your model” later in 
+this document. 
+
+= Installing Octave and MPITB on Lisa =
+
+Octave with MPITB for the Lisa 64-bit architecture is installed in /home/dgorea/octave. 
+Very soon it will be available cluster-wide. If you just want to use this installation, you can skip this 
+section entirely. 
+However, if you would like to have your own installation, you can follow the following steps to 
+compile and build octave and MPITB for the 64-bit architecture nodes on Lisa. Note that the $ 
+character denotes your prompt. 
+1. Login to your Lisa64 account on lisa64.sara.nl 
+2. Download the latest Octave distribution. Replace <x.x.x> with your version, i.e 3.0.3 
+$ 
+3. Uncompress the file. 
+$ tar zxvf octave-<x.x.x>.tar.gz 
+At this moment you should have a directory octave-<x.x.x> in your home directory. 
+To check this, type: 
+$ ls
+4. Create the directory where the octave installation will be (let's call it octave for instance): 
+$ mkdir octave 
+5. Go to the octave-<x.x.x> directory: 
+$ cd octave-<x.x.x> 
+6. Now compile and install Octave in the newly created directory. This usually takes a while 
+and produces lots of output messages. Just type the following sequence of commands, 
+replacing <your account> with your Lisa username. 
+$ .configure –prefix=/home/<your account>/octave 
+...lots of output 
+$ make 
+...lots of output 
+$ make install 
+$ make clean 
+7. You can delete the downloaded archive and the directory with the distribution if you like: 
+$ cd .. 
+$ rm -r octave-<x.x.x> 
+$ rm octave-<x.x.x>.tar.gz 
+8. Download the latest MPITB distribution 
+9. Go to the  octave installation directory 
+$ cd octave 
+10.Uncompress the downloaded MPITB here: 
+$ tar jxvf ~/mpitb-<...>.tar.bz2 
+You should have now a directory called mpitb. You can check this by typing: 
+$ ls 
+11. In order to install MPITB you need to set some environment variables so that MPITB 
+finds Octave and Open MPI. Just run this: 
+$ module load openmpi/gnu 
+$ export PATH=/home/<your account>/octave/bin:$PATH 
+12.Now you need to compile and install MPITB in that directory, for 64-bit architectures, the 
+existing version of Open MPI and  Octave. First remove the existing binaries: 
+$ cd mpitb 
+$ rm -r DLD* 
+Then create the new installation directory corresponding to the your octave version and the 
+existing ompi and gcc: 
+$ mkdir DLD-oc
+Create a link to that directory: 
+$ ln -s DLD-oct<x.x.x>-ompi1.3-gcc4.3.2-x86_64 DLD 
+$ cd src 
+Make sure that Makefile.inc points to the Open MPI makefile: 
+$ rm Makefile.inc 
+$ ln -s Makefile.inc.OMPI 
+Run make: 
+$ make 
+....lots of output 
+You should be done now. 
+
  

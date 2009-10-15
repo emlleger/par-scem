@@ -1,13 +1,55 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+= Parallel programming on Lisa =
+Roughly, parallel computing occurs when a problem is split in different tasks that are executed in 
+parallel. A program needs to be designed to run in parallel. 
+Any parallel program makes use of some sort of middle ware that enables communication between 
+its parallel processes. One of these is  MPI (Message Passing Interface).  On the 64-bit  nodes Lisa 
+uses a an MPI implementation called Open MPI. Open MPI materializes in a set of libraries, 
+containing methods for exchanging information between parallel processes in a program. 
+It is possible to run Octave parallel code on the 64-bit architecture nodes on the  Lisa cluster.1  
+Although Lisa has a Matlab module installed, only serial jobs can be run, i.e jobs that are executed 
+on a single node. Of course, one can run several serial jobs in parallel, but a single Matlab program 
+(job) cannot be split in several processes that  run in parallel. 
+If you would like to execute parallel programs on Lisa, for the time being you need to run your 
+coding as Octave. In general, Matlab code is compatible with Octave, but there are a few syntax 
+differences.  Some of them are  described in this wiki book: 
+http://en.wikibooks.org/wiki/MATLAB_Programming/Differences_between_Octave_and_MATLA 
+B
 
-Add your content here.
 
+= Short Introduction to Parallel SCEM =
+SCEM-UA  is a general purpose global parameter optimization algorithm that provides an estimate 
+of the most likely parameter set and its underlying posterior probability distribution. 
+In general, application of global optimization methods to high-dimensional parameter estimation 
+problems requires the solution of a large number of deterministic model runs. SCEM-UA's 
+architecture in itself is embarrassingly parallel, i.e it can be decomposed into processes that are 
+executed in parallel. More exactly, independent model simulations can run on different nodes of a 
+distributed system. This takes place in two phases using the master-slave paradigm. In the first 
+phase, the master samples (s) parameter combinations randomly from the prior distribution and 
+distributes the evaluation of the fitness function for the individuals in the population over the slave 
+processors. The slaves compute the posterior probabilities and send the results back to the master. In 
+the second phase, the master sorts the points in decreasing order of the posterior probability 
+distribution, initializes the starting points of the (k) sequences and builds the corresponding 
+complexes. Then it generates and distributes the new candidate points to the slaves. Each slave 
+evolves a different sequence and complex and sends the results to the master. The master unpacks 
+1As of March 18th 2009, new 64-bit architecture nodes were added to the Lisa cluster. In the end all 
+nodes will run in AMD64 mode.  On these nodes  OpenMPI is the standard message passing 
+interface. More details on this topic here: 
+https://subtrac.sara.nl/userdoc/wiki/lisa/news/amd64-phase1 
+To log in to the AMD-64 environment, you need to log in using the host name 
+lisa64.sara.nl.
+the complexes back into the set and sorts the points in decreasing order of the posterior probability 
+distribution, checks the convergence and, if necessary, re-iterates. 
+Parallel SCEM-UA is the adaptation of the SCEM-UA algorithm implemented in GNU Octave for 
+multiprocessor distributed systems using  the MPI standard (Open MPI) (enabled in Octave by 
+MPITB). 
+If you would like to apply the SCEM algorithm to optimize the parameters of your model, you can 
+simply do so by providing your model, some initialization parameters, the measurement data and 
+instructing SCEM where to find them. A detailed description on how to proceed,is provided in the 
+rest o this document.
 
-= Details =
-
-Add your content here.  Format your content with:
+= Create an account on the Lisa cluster =
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages

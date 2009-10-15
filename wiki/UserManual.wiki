@@ -54,22 +54,23 @@ rest o this document.
 If you do not have  an account on the Lisa cluster, send an e-mail to SARA (hic at sara dot nl) with the 
 following information: 
 
-* Your name, address, telephone number, e-mail address 
-* The faculty and/or subfaculty 
-* The project leader (including email address) 
-* An estimation of cpu-hours needed (for instance  10 node-hours) 
-* A short description of your project (10 lines or less) 
+  * Your name, address, telephone number, e-mail address 
+  * The faculty and/or subfaculty 
+  * The project leader (including email address) 
+  * An estimation of cpu-hours needed (for instance  10 node-hours) 
+  * A short description of your project (10 lines or less) 
 
 = Log in to your Lisa account =
 
 Lisa cluster runs on Linux OS. To connect to your Lisa account from your machine you will need a 
 SSH client. On Windows, you can use a program called Putty. You can download the latest version 
 of Putty from http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe. 
-1. Run putty.exe 
-2. Fill in the host name with lisa64.sara.nl 
-3. Make sure SSH is enabled 
-4. Click “Open”
-5. Fill in your username and password when prompted. 
+
+  1. Run putty.exe 
+  2. Fill in the host name with lisa64.sara.nl 
+  3. Make sure SSH is enabled 
+  4. Click “Open”
+  5. Fill in your username and password when prompted. 
 After the first login, don't forget to change your password, using the passwd command. 
 
 =  Copying your model files in your Lisa account =

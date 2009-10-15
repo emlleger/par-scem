@@ -66,11 +66,12 @@ Lisa cluster runs on Linux OS. To connect to your Lisa account from your machine
 SSH client. On Windows, you can use a program called Putty. You can download the latest version 
 of Putty from http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe. 
 
-  1. Run putty.exe 
-  2. Fill in the host name with lisa64.sara.nl 
-  3. Make sure SSH is enabled 
-  4. Click “Open”
-  5. Fill in your username and password when prompted. 
+  # Run putty.exe 
+  # Fill in the host name with lisa64.sara.nl 
+  # Make sure SSH is enabled 
+  # Click “Open”
+  # Fill in your username and password when prompted. 
+
 After the first login, don't forget to change your password, using the passwd command. 
 
 =  Copying your model files in your Lisa account =
@@ -79,12 +80,11 @@ In order to do this this you need a FTP client. On Windows machines you can use 
 can be downloaded from http://winscp.net/download/winscp421setup.exe. To install it launch the 
 executable and follow the steps in the wizard. 
 To copy the model files to your account: 
-1. Launch WinSCP 
-2. Login to your FTP account on Lisa:
-3. Click Login (you can also save the session for future use) 
-4. Create your model directory in your account 
-5. Copy there the files as described in section “Running Parallel SCEM on your model” later in 
-this document. 
+  # Launch WinSCP 
+  # Login to your FTP account on Lisa:
+  # Click Login (you can also save the session for future use) 
+  # Create your model directory in your account 
+  # Copy there the files as described in section “Running Parallel SCEM on your model” later in this document. 
 
 = Installing Octave and MPITB on Lisa =
 
@@ -94,19 +94,19 @@ section entirely.
 However, if you would like to have your own installation, you can follow the following steps to 
 compile and build octave and MPITB for the 64-bit architecture nodes on Lisa. Note that the $ 
 character denotes your prompt. 
-1. Login to your Lisa64 account on lisa64.sara.nl 
-2. Download the latest Octave distribution. Replace <x.x.x> with your version, i.e 3.0.3 
+  # Login to your Lisa64 account on lisa64.sara.nl 
+  # Download the latest Octave distribution. Replace <x.x.x> with your version, i.e 3.0.3 
 $ 
-3. Uncompress the file. 
+  # Uncompress the file. 
 $ tar zxvf octave-<x.x.x>.tar.gz 
 At this moment you should have a directory octave-<x.x.x> in your home directory. 
 To check this, type: 
 $ ls
-4. Create the directory where the octave installation will be (let's call it octave for instance): 
+ # Create the directory where the octave installation will be (let's call it octave for instance): 
 $ mkdir octave 
-5. Go to the octave-<x.x.x> directory: 
+  # Go to the octave-<x.x.x> directory: 
 $ cd octave-<x.x.x> 
-6. Now compile and install Octave in the newly created directory. This usually takes a while 
+ # Now compile and install Octave in the newly created directory. This usually takes a while 
 and produces lots of output messages. Just type the following sequence of commands, 
 replacing <your account> with your Lisa username. 
 $ .configure –prefix=/home/<your account>/octave 
@@ -115,7 +115,7 @@ $ make
 ...lots of output 
 $ make install 
 $ make clean 
-7. You can delete the downloaded archive and the directory with the distribution if you like: 
+  # You can delete the downloaded archive and the directory with the distribution if you like: 
 $ cd .. 
 $ rm -r octave-<x.x.x> 
 $ rm octave-<x.x.x>.tar.gz 
